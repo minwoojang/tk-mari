@@ -96,7 +96,8 @@ class GeometryManager(object):
                         sg_res = []
                         try:
                             sg_res = engine.shotgun.find(sg_publish["type"], filters, [])
-                        except Exception, e:
+                        # except Exception, e:
+                        except Exception as e:
                             raise TankError("Failed to query publish versions for publish '%s': %s" 
                                             % (sg_publish["name"], e))
                         sg_publish_version_ids = set([res["id"] for res in sg_res])
@@ -179,7 +180,8 @@ class GeometryManager(object):
             new_geo = mari.geo.load(publish_path,
                                     options, 
                                     objects_to_load)
-        except Exception, e:
+        # except Exception, e:
+        except Exception as e:
             raise TankError("Failed to load published geometry from '%s': %s" % (publish_path, e))       
         
         # and initialize all new geo:
@@ -222,7 +224,8 @@ class GeometryManager(object):
             geo.addVersion(publish_path,
                            version_name, 
                            options)
-        except Exception, e:
+        # except Exception, e:
+        except Exception as  e:
             raise TankError("Failed to load published geometry version from '%s': %s" % (publish_path, e))           
     
         # Make sure the version was successfully added:

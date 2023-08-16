@@ -64,5 +64,6 @@ def update_publish_records(sg_publishes, min_fields = None):
             # update the publish records:
             for sg_item in sg_res:
                 to_update[sg_item["id"]].update(sg_item)
-        except Exception, e:
+        # except Exception, e:
+        except Exception as e:
             raise TankError("Failed to retrieve publish details from Shotgun: %s" % e)

@@ -85,7 +85,8 @@ class ProjectManager(object):
                                  channels_to_import,
                                  project_meta_options, 
                                  objects_to_load)
-        except Exception, e:
+        # except Exception, e:
+        except Exception as e:
             raise TankError("Failed to create new project: %s" % e)        
         
         # make sure that the current project is the one we created:

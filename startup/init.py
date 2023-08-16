@@ -20,7 +20,7 @@ def show_warning(msg):
     :param msg:    The warning message to show
     """
     warning_msg = "Shotgun Warning: %s" % msg 
-    print warning_msg
+    print (warning_msg)
     if not mari.app.inTerminalMode():
         mari.utils.misc.message(warning_msg, "Shotgun Warning")
 
@@ -31,7 +31,8 @@ def bootstrap_sgtk():
     """
     try:
         import sgtk
-    except Exception, e:
+    # except Exception, e:
+    except Exception as e:
         show_warning("Could not import sgtk! Disabling for now: %s" % e)
         return
     
@@ -42,13 +43,15 @@ def bootstrap_sgtk():
     engine_name = os.environ.get("TANK_ENGINE")
     try:
         context = sgtk.context.deserialize(os.environ.get("TANK_CONTEXT"))
-    except Exception, e:
+    # except Exception, e:
+    except Exception as e:
         show_warning("Could not create context! Shotgun Pipeline Toolkit will be disabled. Details: %s" % e)
         return
 
     try:    
         engine = sgtk.platform.start_engine(engine_name, context.sgtk, context)
-    except Exception, e:
+    # except Exception, e:
+    except Exception as e:
         show_warning("Could not start engine: %s" % e)
         return
     

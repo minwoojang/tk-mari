@@ -244,14 +244,14 @@ class MariEngine(sgtk.platform.Engine):
         if not hasattr(self, "_debug_logging"):
             self._debug_logging = self.get_setting("debug_logging", False)
         if self._debug_logging:
-            print 'Shotgun Debug: %s' % msg
+            print ('Shotgun Debug: %s' % msg)
 
     def log_info(self, msg):
         """
         Log some info
         :param msg:    The info message to log
         """
-        print 'Shotgun Info: %s' % msg
+        print ('Shotgun Info: %s' % msg)
 
     def log_warning(self, msg):
         """
@@ -259,7 +259,7 @@ class MariEngine(sgtk.platform.Engine):
         :param msg:    The warning message to log
         """        
         msg = 'Shotgun Warning: %s' % msg
-        print msg
+        print (msg)
         #mari.utils.message(msg)
 
     def log_error(self, msg):
@@ -268,7 +268,7 @@ class MariEngine(sgtk.platform.Engine):
         :param msg:    The error message to log
         """        
         msg = 'Shotgun Error: %s' % msg
-        print msg
+        print (msg)
         mari.utils.message(msg)
 
     def __on_project_opened(self, opened_project, is_new):
@@ -313,7 +313,8 @@ class MariEngine(sgtk.platform.Engine):
         ctx = None
         try:
             ctx = self.sgtk.context_from_entity(ctx_entity["type"], ctx_entity["id"])
-        except TankError, e:
+        # except TankError, e:
+        except TankError as e:
             self.log_error("Work area unchanged - Failed to create context from '%s %s': %s" 
                            % (ctx_entity["type"], ctx_entity["id"], e))
             return
@@ -332,9 +333,11 @@ class MariEngine(sgtk.platform.Engine):
                 
             # start new engine with the new context:
             sgtk.platform.start_engine(self.name, ctx.sgtk, ctx)
-        except TankError, e:
+        # except TankError, e:
+        except TankError as e:
             self.log_error("Failed to start Shotgun engine for Work Area %s: %s" % (ctx, e))
-        except Exception, e:
+        # except Exception, e:
+        except Exception as e:
             self.log_exception("Failed to start Shotgun engine for Work Area %s" % ctx)
 
 
